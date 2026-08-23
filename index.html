@@ -61,6 +61,12 @@
   correctOkoyeName();
   function correctRomaFiorentinaGea(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='roma'&&norm(x.away)==='fiorentina');if(!match)return;let changed=false;if(Array.isArray(match.predAway)){match.predAway=match.predAway.map(n=>{if(norm(n)==='gea'){changed=true;return 'Brescianini'}return n})}if(changed){match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
   correctRomaFiorentinaGea();
+  function correctBolognaLazioMoro(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='bologna'&&norm(x.away)==='lazio');if(!match)return;let changed=false;for(const key of ['predHome','predAway'])if(Array.isArray(match[key]))match[key]=match[key].map(n=>{if(norm(n)==='oro'){changed=true;return 'Moro'}return n});if(changed){match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
+  correctBolognaLazioMoro();
+  function correctTorinoMilanMaignan(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='torino'&&norm(x.away)==='milan');if(!match)return;let changed=false;for(const key of ['predHome','predAway'])if(Array.isArray(match[key]))match[key]=match[key].map(n=>{if(norm(n)==='mainan'){changed=true;return 'Maignan'}return n});if(changed){match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
+  correctTorinoMilanMaignan();
+  function addTorinoMilanIsmajli(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='torino'&&norm(x.away)==='milan');if(!match)return;if(!Array.isArray(match.predHome))match.predHome=[];if(!match.predHome.some(n=>norm(n)==='ismajli')){match.predHome.push('Ismajli');match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
+  addTorinoMilanIsmajli();
   function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return []}}
   function persist(){localStorage.setItem(KEY,JSON.stringify(data));render()}
   function val(id,v){const x=$('#'+id); if(v!==undefined)x.value=v??''; return x.value.trim()}
