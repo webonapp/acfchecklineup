@@ -67,6 +67,12 @@
   correctTorinoMilanMaignan();
   function addTorinoMilanIsmajli(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='torino'&&norm(x.away)==='milan');if(!match)return;if(!Array.isArray(match.predHome))match.predHome=[];if(!match.predHome.some(n=>norm(n)==='ismajli')){match.predHome.push('Ismajli');match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
   addTorinoMilanIsmajli();
+  function correctInterMonzaLucchesi(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='inter'&&norm(x.away)==='monza');if(!match)return;let changed=false;if(Array.isArray(match.officialAway))match.officialAway=match.officialAway.map(n=>{if(norm(n)==='kis'){changed=true;return 'Lucchesi'}return n});if(changed){match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
+  correctInterMonzaLucchesi();
+  function correctGenoaNapoliOfficialGenoa(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='genoa'&&norm(x.away)==='napoli');if(!match)return;let changed=false;if(Array.isArray(match.officialHome))match.officialHome=match.officialHome.map(n=>{const v=norm(n);if(v==='gid'){changed=true;return 'Ostigard'}if(v==='norton cuffy a'){changed=true;return 'Norton-Cuffy'}return n});if(changed){match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
+  correctGenoaNapoliOfficialGenoa();
+  function correctParmaCagliariDeiola(){const match=data.find(x=>String(x.round)==='1'&&norm(x.home)==='parma'&&norm(x.away)==='cagliari');if(!match)return;let changed=false;if(Array.isArray(match.officialAway))match.officialAway=match.officialAway.map(n=>{if(norm(n)==='deiola z'){changed=true;return 'Deiola'}return n});if(changed){match.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(data))}}
+  correctParmaCagliariDeiola();
   function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch{return []}}
   function persist(){localStorage.setItem(KEY,JSON.stringify(data));render()}
   function val(id,v){const x=$('#'+id); if(v!==undefined)x.value=v??''; return x.value.trim()}
